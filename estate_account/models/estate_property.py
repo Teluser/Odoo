@@ -5,11 +5,10 @@ class EstateProperty(models.Model):
 
     def make_property_sold(self):
         super(EstateProperty, self).make_property_sold()
-        journal_id = self.env['account.move'].with_context(type='out_invoice',default_journal_type='sale')._get_default_journal()
-        journal = self.env['account.journal'].browse(journal_id)
+        journal_id = self.env['account.move'].sudo().with_context(type='out_invoice',default_journal_type='sale')._get_default_journal()
+        journal = self.env['account.journal'].sudo().browse(journal_id)
         account_id = journal.default_credit_account_id.id
         if not journal_id:
-            print(self.env.user.company_id.name)
             raise UserError('Please define an accounting sales journal for the company')
         invoice_lines = [
             {'name': '6% of the selling price', 'quantity': 1, 'price_unit': 0.06*self.selling_price, 'account_id': account_id},
