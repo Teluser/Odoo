@@ -27,7 +27,7 @@ class EstateProperty(models.Model):
                              copy=False, required=True, default='new')
     property_type_id = fields.Many2one('estate.property.type', string="Property Type")
     buyer_id = fields.Many2one('res.partner', string="Buyer", copy=False)
-    salesman_id = fields.Many2one('res.users', string="Salesman", default=lambda self: self.env.user)
+    salesman_id = fields.Many2one('res.users', string="Salesman")
     tag_ids = fields.Many2many('estate.property.tag')
     offer_ids = fields.One2many('estate.property.offer', 'property_id')
     total_area = fields.Integer("Total Area (sqm)", compute="_total_area")

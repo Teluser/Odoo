@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="rule_view_base_on_company" model="ir.rule">
+        <field name="name">Estate: View only properties of user company</field>
+        <field name="model_id" ref="model_estate_property"/>
+        <field name="groups" eval="[(4, ref('estate.estate_group_user'))]"/>
+        <field name="domain_force">[('company_id','in', user.company_ids.mapped('id'))]</field>
+        <field name="perm_read" eval="True"/>
+    </record>
+</odoo>

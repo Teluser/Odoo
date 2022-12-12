@@ -8,6 +8,9 @@
             <xpath expr="//button[@name='make_property_sold']" position="attributes">
                 <field name="context">{'type':'sale','default_journal_id': journal_id}</field>
             </xpath>
+            <xpath expr="//page/group/field[@name='buyer_id']" position="after">
+                <field name="company_id"/>
+            </xpath>
         </field>
     </record>
 </odoo>

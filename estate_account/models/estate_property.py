@@ -2,7 +2,7 @@ from odoo import models,fields
 from odoo.exceptions import UserError
 class EstateProperty(models.Model):
     _inherit = "estate.property"
-
+    company_id = fields.Many2one('res.company', string="Company", required=True, default=lambda self: self.env.user.company_id)
     def make_property_sold(self):
         super(EstateProperty, self).make_property_sold()
         journal_id = self.env['account.move'].sudo().with_context(type='out_invoice',default_journal_type='sale')._get_default_journal()

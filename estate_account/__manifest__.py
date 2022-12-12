@@ -7,6 +7,7 @@
 'version': '0.1',
 'depends': ['estate','account'],
 'data': [
+    'security/rules.xml',
     'views/estate_property_views.xml'
 ],
 'sequence': 1,
