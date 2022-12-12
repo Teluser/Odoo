@@ -5,8 +5,11 @@
 Demo excercise in Odoo documentation """,
 'author': "Linh Thuy",
 'version': '0.1',
+'category': "Real Estate/Brokerage",
 'depends': ['base'],
 'data': [
+    'security/security.xml',
+    'security/security_rules.xml',
     'security/ir.model.access.csv',
     'views/estate_property_views.xml',
     'views/estate_property_offer_views.xml',
