@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pet_form" model="ir.ui.view">
+        <field name="name">pet.form</field>
+        <field name="model">pet</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="price"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Character">
+                        <field name="character"/>
+                    </page>
+                    <page string="Additional Information">
+                        <field name="add_info"/>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pet_tree" model="ir.ui.view">
+        <field name="name">pet.tree</field>
+        <field name="model">pet</field>
+        <field name="arch" type="xml">
+            <tree>
+               <field name="name"/>
+               <field name="price"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
