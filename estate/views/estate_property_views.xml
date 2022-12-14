@@ -25,6 +25,7 @@
                 <header>
                     <button name="make_property_sold" type="object" states="new,received,accepted" class="oe_highlight" string="Sold"/>
                     <button name="make_property_cancel" type="object" states="new,received,accepted" class="oe_highlight" string="Cancel"/>
+                    <button name="%(estate.report_final_sale)d" type="action" states="sold" class="oe_highlight" string="Print Sale Info"/>
                     <field name="state" widget="statusbar" statusbar_visible="new,received,accepted,sold"/>
                 </header>
                 <sheet>
