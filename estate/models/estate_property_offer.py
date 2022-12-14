@@ -9,7 +9,7 @@ class EstatePropertyOffer(models.Model):
     price = fields.Float("Price")
     partner_id = fields.Many2one('res.partner', string="Partner", required=True)
     status = fields.Selection(string="Status", selection=[('refused', 'Refused'), ('accepted', 'Accepted')], copy=False)
-    property_id = fields.Many2one('estate.property', required=True,ondelete="cascade")
+    property_id = fields.Many2one('estate.property', required=True, ondelete="cascade")
     property_type_id = fields.Many2one(related='property_id.property_type_id', store=True)
     validity = fields.Integer(string="Validity (days)", default=7)
     date_deadline = fields.Date(string="Deadline", compute='_compute_date_deadline', inverse='_inverse_date_deadline')
