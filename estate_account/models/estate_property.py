@@ -1,9 +1,19 @@
-from odoo import models,fields
+from odoo import models,fields,api
 from odoo.exceptions import UserError
 class EstateProperty(models.Model):
     _inherit = "estate.property"
     company_id = fields.Many2one('res.company', string="Company", required=True, default=lambda self: self.env.user.company_id)
     invoice_id = fields.Many2one('account.invoice')
+    product_id = fields.Many2one('product.product')
+    @api.model
+    def create(self, vals):
+        res = super(EstateProperty, self).create(vals)
+        product = {
+            'name': res.name,
+        }
+        res.product_id = self.env['product.product'].create(product)
+        return res
+
     def make_property_sold(self):
         super(EstateProperty, self).make_property_sold()
         journal_id = self.env['account.move'].sudo().with_context(type='out_invoice',default_journal_type='sale')._get_default_journal()
@@ -12,7 +22,7 @@ class EstateProperty(models.Model):
         if not journal_id:
             raise UserError('Please define an accounting sales journal for the company')
         invoice_lines = [
-            {'name': '6% of the selling price', 'quantity': 1, 'price_unit': 0.06*self.selling_price, 'account_id': account_id},
+            {'product_id': self.product_id.id, 'name': '6% of the selling price', 'quantity': 1, 'price_unit': 0.06*self.selling_price, 'account_id': account_id},
             {'name': 'Administrative fees', 'quantity': 1, 'price_unit': 100.00, 'account_id': account_id}
         ]
         invoice_vals = {
