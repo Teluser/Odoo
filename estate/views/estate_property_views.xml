@@ -81,7 +81,7 @@
         <field name="name">estate.property.kanban</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="property_type_id">
+            <kanban default_group_by="state">
                 <field name="name"/>
                 <field name="expected_price"/>
                 <field name="best_price"/>
@@ -127,11 +127,42 @@
             </search>
         </field>
     </record>
-
+    <record id="estate_property_graph" model="ir.ui.view">
+        <field name="name">estate.property.graph</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="name"/>
+                <field name="name" type="row"/>
+            </graph>
+        </field>
+    </record>
+<!--    <record id="estate_property_dashboard" model="ir.ui.view">-->
+<!--        <field name="name">estate.property.dashboard</field>-->
+<!--        <field name="model">estate.property</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <dashboard>-->
+<!--&lt;!&ndash;&lt;!&ndash;                <group>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    <view type="graph" ref="estate.estate_property_graph"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                </group>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <group>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    <group>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                        <aggregate string="Min Expected Price" name="min_expected_price" field="expected_price" group_operator="min"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                        <aggregate string="Max Expected Price" name="max_expected_price" field="expected_price" group_operator="max"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                        <aggregate string="Total Expected Price" name="total_expected_price" field="expected_price" group_operator="sum"/>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                        <aggregate string="Avg Living Area" name="avg_living_area" field="living_area" group_operator="avg"/>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    </group>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                    <group>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                        <view type="graph" ref="estate.estate_property_type_graph_pie"/>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                    </group>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                </group>&ndash;&gt;&ndash;&gt;-->
+<!--            </dashboard>-->
+<!--        </field>-->
+<!--    </record>-->
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,tree,form,graph</field>
         <field name="context">{'search_default_state':True}</field>
     </record>
 </odoo>

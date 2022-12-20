@@ -10,8 +10,10 @@
                 <field name="validity"/>
                 <field name="date_deadline"/>
                 <field name="property_type_id"/>
-                <button name="make_accept" attrs="{'invisible': ['|',('status', '=', 'refused'),('status', '=', 'accepted')]}" string="Accept" type="object" icon="fa-check"/>
-                <button name="make_refuse" attrs="{'invisible': ['|',('status', '=', 'refused'),('status', '=', 'accepted')]}" string="Refuse" type="object" icon="fa-times"/>
+                <button name="make_accept" string="Accept" type="object" icon="fa-check"/>
+                <button name="make_refuse" string="Refuse" type="object" icon="fa-times"/>
+<!--                <button name="make_accept" attrs="{'invisible': ['|',('status', '=', 'refused'),('status', '=', 'accepted')]}" string="Accept" type="object" icon="fa-check"/>-->
+<!--                <button name="make_refuse" attrs="{'invisible': ['|',('status', '=', 'refused'),('status', '=', 'accepted')]}" string="Refuse" type="object" icon="fa-times"/>-->
                 <field name="status" invisible="True"/>
             </tree>
         </field>

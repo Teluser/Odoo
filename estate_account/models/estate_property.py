@@ -15,7 +15,7 @@ class EstateProperty(models.Model):
         return res
 
     def make_property_sold(self):
-        super(EstateProperty, self).make_property_sold()
+        res = super(EstateProperty, self).make_property_sold()
         journal_id = self.env['account.move'].sudo().with_context(type='out_invoice',default_journal_type='sale')._get_default_journal()
         journal = self.env['account.journal'].sudo().browse(journal_id)
         account_id = journal.default_credit_account_id.id
@@ -33,6 +33,5 @@ class EstateProperty(models.Model):
             'invoice_line_ids': [(0,0,invoice_line_vals) for invoice_line_vals in invoice_lines],
             'journal_id': journal_id,
         }
-        res = self.env['account.invoice'].sudo().with_context(default_move_type='out_invoice').create(invoice_vals)
-        self.invoice_id = res
+        self.invoice_id = self.env['account.invoice'].sudo().with_context(default_move_type='out_invoice').create(invoice_vals)
         return res

@@ -35,8 +35,11 @@ class EstatePropertyOffer(models.Model):
     def make_accept(self):
         for r in self:
             # Neu da accepted offer thi k cho accept offer nua
-            if 'accepted' in r.property_id.offer_ids.mapped('status'):
-                raise UserError('Can only accept one offer!')
+            # if 'accepted' in r.property_id.offer_ids.mapped('status'):
+            #     raise UserError('Can only accept one offer!')
+            offers = r.property_id.offer_ids - r
+            for offer in offers:
+                offer.make_refuse()
             r.status = 'accepted'
             r.property_id.state='accepted'
             r.property_id.selling_price = r.price
@@ -50,4 +53,5 @@ class EstatePropertyOffer(models.Model):
         if 'accepted' not in r.property_id.offer_ids.mapped('status'):
             r.property_id.selling_price = None
             r.property_id.buyer_id = None
+            r.property_id.state = 'received'
         return True
